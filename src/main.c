@@ -31,10 +31,10 @@ int get_key(void) {
 	while (1) {
 		memset(&pad, 0, sizeof(pad));
 		sceCtrlPeekBufferPositive(0, &pad, 1);
-		unsigned new = prev ^ (pad.buttons & prev);
+		unsigned newb = prev ^ (pad.buttons & prev);
 		prev = pad.buttons;
 		for (int i = 0; i < sizeof(buttons)/sizeof(*buttons); ++i)
-			if (new & buttons[i])
+			if (newb & buttons[i])
 				return buttons[i];
 
 		sceKernelDelayThread(1000); // 1ms
